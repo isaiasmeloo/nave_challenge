@@ -56,11 +56,3 @@ Para editar um `naver`, você deve usar a request de `navers/update` disponível
 Para fazer a navegação entre rotas, utilize o [react-navigation](https://reactnavigation.org/docs/getting-started). Ele também fornece um componente de [drawer](https://reactnavigation.org/docs/drawer-based-navigation), que faz parte do layout que está no figma.
 
 Para fazer os alertas de sucesso/confirmação/erro, pode utilizar o componente de [modal do react native](https://reactnative.dev/docs/modal).
-
-## Observações
-
-
-
-Ao finalizar o teste, envie o link do seu repositório por e-mail para [vagas@nave.rs](mailto:vagas@nave.rs).
-
-Se durante o processo de desenvolvimento não conseguiu fazer algo, explique qual o impedimento que encontrou e como tentou resolver em uma seção `Dificuldades` do seu README e nos envie até onde chegou. 😄
