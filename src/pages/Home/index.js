@@ -31,18 +31,40 @@ export default function Home() {
     <View style={{
       flex: 1,
       alignItems: 'center',
-      // justifyContent: 'center'
+      padding: 35,
     }}>
-      <TouchableOpacity onPress={() => {
-        navigation.toggleDrawer();
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
       }}>
-        <Text>home</Text>
-      </TouchableOpacity>
+        <Text style={{ fontSize: 22, fontWeight: '600' }}>Navers</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#212121',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+          }}
+          onPress={() => {
+            navigation.toggleDrawer();
+          }}
+        >
+          <Text style={{ color: '#FFFFFF' }}>Adicionar naver</Text>
+        </TouchableOpacity>
+      </View>
 
       <FlatList
         numColumns={2}
         keyExtractor={item => item.id}
         data={navers}
+        columnWrapperStyle={{
+          justifyContent: 'space-between'
+        }}
+        style={{
+          width: '100%'
+        }}
         renderItem={({ item }) => <CardNaver naver={item} />}
       />
     </View>
