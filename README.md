@@ -1,8 +1,11 @@
-## 💻 Sobre o projeto
 
-# Desafio de React Native
+<p align="center">
+ <img width="100px" src="https://avatars3.githubusercontent.com/u/33161449?s=200&v=4" align="center" alt="Nave Team" />
+ <h2 align="center">Challenge - Nave Team</h2>
+ <p align="center">Desafio técnico - React Native</p>
+</p>
 
-## Navedex
+## 💻 Sobre o projeto - Navedex
 
 O desafio é criar um aplicativo para visualização e criação dos navers, possuindo informações como: nome, idade, cargo, tempo de empresa e projetos que participou.
 
