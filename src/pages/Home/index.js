@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View, TouchableOpacity, FlatList } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import api from '../../services/api'
 import CardNaver from '../../components/CardNaver'
 
+import { useAuth } from '../../hooks/auth'
+
+import { Container, Title, ButtonAddNaver, TextButtonAddNaver, ContainerTitle } from './styles'
+
 export default function Home() {
   const navigation = useNavigation()
   const [navers, setNavers] = useState([])
 
+  const { user } = useAuth()
+
   useEffect(() => {
-    api.get('navers',
-      {
-        headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmZWMyNmQ1LTY4NTItNDMzNy04MTg5LTg5Yzc3YThkNzMzYyIsImVtYWlsIjoiaXNhaWFzbWVsb0BuYXZlLnJzIiwiaWF0IjoxNjAzNzMwMDkyfQ.xltf7Qtib_mIdGc_EIEVafigBdzhXZ7kL82qFbaLay0'
-        }
-      }
-    )
+    api.get('navers')
+    // api.get('navers', { headers: { Authorization: `Bearer ${user.token}` } })
       .then(response => {
         console.log('RESPOSTA ', response.data)
         if (response.status === 200) {
@@ -28,32 +29,17 @@ export default function Home() {
       })
   }, [])
   return (
-    <View style={{
-      flex: 1,
-      alignItems: 'center',
-      padding: 35,
-    }}>
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%'
-      }}>
-        <Text style={{ fontSize: 22, fontWeight: '600' }}>Navers</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#212121',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 10
-          }}
+    <Container>
+      <ContainerTitle>
+        <Title>Navers</Title>
+        <ButtonAddNaver
           onPress={() => {
             navigation.toggleDrawer();
           }}
         >
-          <Text style={{ color: '#FFFFFF' }}>Adicionar naver</Text>
-        </TouchableOpacity>
-      </View>
+          <TextButtonAddNaver>Adicionar naver</TextButtonAddNaver>
+        </ButtonAddNaver>
+      </ContainerTitle>
 
       <FlatList
         numColumns={2}
@@ -62,11 +48,9 @@ export default function Home() {
         columnWrapperStyle={{
           justifyContent: 'space-between'
         }}
-        style={{
-          width: '100%'
-        }}
+        style={{ width: '100%' }}
         renderItem={({ item }) => <CardNaver naver={item} />}
       />
-    </View>
+    </Container>
   )
 }

@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { Image } from 'react-native';
+
+import { Container, NaverName, NaverJobRole } from './styles';
 
 import image from '../../assets/IMG_9945.png';
 
 const CardNaver = ({ naver }) => {
   return (
-    <View key={naver.id} style={{ marginTop: 20 }}>
+    <Container key={naver.id}>
       <Image source={image} />
 
-      <Text style={{ fontWeight: 'bold' }}>{naver.name}</Text>
-      <Text>{naver.job_role}</Text>
-    </View>
+      <NaverName>{naver.name}</NaverName>
+      <NaverJobRole>{naver.job_role}</NaverJobRole>
+    </Container>
   );
 }
 

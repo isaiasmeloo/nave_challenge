@@ -33,8 +33,8 @@ export default function AppRoutes() {
       drawerContentOptions={{
         activeTintColor: '#212121',
         labelStyle: {
+          fontFamily: 'Montserrat-SemiBold',
           fontSize: 24,
-          fontWeight: '600',
           textAlign: 'center'
         },
         activeBackgroundColor: "#FFFFFF",
