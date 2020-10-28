@@ -17,7 +17,6 @@ export default function Home() {
 
   useEffect(() => {
     api.get('navers')
-    // api.get('navers', { headers: { Authorization: `Bearer ${user.token}` } })
       .then(response => {
         console.log('RESPOSTA ', response.data)
         if (response.status === 200) {
@@ -33,9 +32,7 @@ export default function Home() {
       <ContainerTitle>
         <Title>Navers</Title>
         <ButtonAddNaver
-          onPress={() => {
-            navigation.toggleDrawer();
-          }}
+          onPress={() => {}}
         >
           <TextButtonAddNaver>Adicionar naver</TextButtonAddNaver>
         </ButtonAddNaver>

@@ -7,9 +7,11 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function loadStoragedData() {
+      setLoading(true)
       const [userStorage, token] = await AsyncStorage.multiGet(
         [
           '@Navers:user',
@@ -21,6 +23,7 @@ function AuthProvider({ children }) {
         api.defaults.headers.Authorization = `Bearer ${JSON.parse(token[1])}`;
         setUser(JSON.parse(userStorage[1]));
       }
+      setLoading(false)
     }
 
     loadStoragedData()
@@ -54,7 +57,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, signIn }}
+      value={{ user, signIn, loading }}
     >
       {children}
     </AuthContext.Provider>

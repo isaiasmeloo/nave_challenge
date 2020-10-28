@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import { Image } from 'react-native';
 
 import logo from '../assets/logo.png'
+import NaverDetail from '../pages/NaverDetail';
 
 const Drawer = createDrawerNavigator();
 const App = createStackNavigator();
@@ -16,11 +17,16 @@ function Navers() {
     <App.Navigator
       screenOptions={{
         headerTitle: () => <Image source={logo} />,
+        cardStyle: { backgroundColor: '#FFFFFF' }
       }}
     >
       <App.Screen
         name="Home"
         component={Home}
+      />
+      <App.Screen
+        name="NaverDetail"
+        component={NaverDetail}
       />
     </App.Navigator>
   )
