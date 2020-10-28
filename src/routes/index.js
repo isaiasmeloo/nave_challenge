@@ -8,7 +8,6 @@ import { useAuth } from '../hooks/auth';
 
 export default function Routes() {
   const { user, loading } = useAuth()
-  console.log('USUARIO ROUTES ', user)
 
   if (loading) {
     return (

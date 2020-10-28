@@ -1,13 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
+import { Button, TextButton } from './styles';
 
-// import { Container } from './styles';
-
-const Button = () => {
+const ButtonComponent = ({ text, textColor, ...props }) => {
   return (
-    <View>
-    </View>
+    <Button {...props}>
+      <TextButton textColor={textColor}>{text}</TextButton>
+    </Button>
   );
 }
 
-export default Button;
+export default ButtonComponent;

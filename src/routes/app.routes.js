@@ -1,13 +1,15 @@
 import React from 'react'
+import { Image, Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import SignIn from '../pages/Auth/SignIn';
 import Home from '../pages/Home';
-import { Image } from 'react-native';
+import NaverDetail from '../pages/NaverDetail';
+import Naver from '../pages/Naver';
 
 import logo from '../assets/logo.png'
-import NaverDetail from '../pages/NaverDetail';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Drawer = createDrawerNavigator();
 const App = createStackNavigator();
@@ -17,16 +19,29 @@ function Navers() {
     <App.Navigator
       screenOptions={{
         headerTitle: () => <Image source={logo} />,
-        cardStyle: { backgroundColor: '#FFFFFF' }
+        cardStyle: { backgroundColor: '#FFFFFF' },
+        headerBackTitleVisible: false,
+        headerTintColor: '#212121',
       }}
     >
       <App.Screen
+        options={({ navigation, route }) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+              <Text>menu</Text>
+            </TouchableOpacity>
+          ),
+        })}
         name="Home"
         component={Home}
       />
       <App.Screen
         name="NaverDetail"
         component={NaverDetail}
+      />
+      <App.Screen
+        name="Naver"
+        component={Naver}
       />
     </App.Navigator>
   )
@@ -50,7 +65,6 @@ export default function AppRoutes() {
           justifyContent: 'center',
         }
       }}
-
     >
       <Drawer.Screen
         name="Home"

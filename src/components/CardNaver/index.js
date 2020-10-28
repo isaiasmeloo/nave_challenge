@@ -12,7 +12,10 @@ const CardNaver = ({ naver }) => {
     <Container key={naver.id} onPress={() => {
       navigation.navigate('NaverDetail', { naverId: naver.id })
     }}>
-      <Image source={image} />
+      <Image
+        source={{ uri: naver?.url }}
+        style={{ height: 156, width: 156 }}
+      />
 
       <NaverName>{naver.name}</NaverName>
       <NaverJobRole>{naver.job_role}</NaverJobRole>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Alert } from 'react-native';
 import { differenceInYears, parseISO } from 'date-fns'
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
+import ButtonComponent from '../../components/Button'
 
 import {
   Container,
@@ -10,13 +12,13 @@ import {
   Description,
   Label,
   ContainerButton,
-  Button,
 } from './styles';
 
 import image from '../../assets/IMG_9945.png';
 
 export default function NaverDetail({ route }) {
   const [naver, setNaver] = useState(null)
+  const navigation = useNavigation()
 
   useEffect(() => {
     async function getNaver() {
@@ -40,13 +42,24 @@ export default function NaverDetail({ route }) {
         console.log('error ', error)
       }
     }
-
     getNaver()
   }, [])
 
+  async function handleDeleteNaver() {
+    try {
+      const response = await api.delete(`/navers/${route.params.naverId}`)
+      console.log(response.data)
+      Alert.alert('Sucesso!', 'Naver excluído.')
+
+      navigation.goBack()
+    } catch (error) {
+      console.log('erro ao excluir ', error)
+    }
+  }
+
   return (
     <View style={{ flex: 1 }}>
-      <Image source={image} style={{ width: '100%', height: '40%' }} />
+      <Image source={{ uri: naver?.url }} style={{ width: '100%', height: '40%' }} />
       <Container>
         <View>
           <Name>{naver?.name}</Name>
@@ -67,12 +80,12 @@ export default function NaverDetail({ route }) {
         </View>
 
         <ContainerButton>
-          <Button style={{ backgroundColor: 'transparent', borderWidth: 1 }}>
-            <Text>Excluir</Text>
-          </Button>
-          <Button>
-            <Text style={{ color: '#FFFFFF' }}>Editar</Text>
-          </Button>
+          <ButtonComponent
+            onPress={handleDeleteNaver}
+            style={{ backgroundColor: 'transparent', borderWidth: 1 }}
+            text="Excluir" textColor="#000000"
+          />
+          <ButtonComponent text="Editar" />
         </ContainerButton>
 
       </Container>

@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useIsFocused } from '@react-navigation/native'
 
 import api from '../../services/api'
 import CardNaver from '../../components/CardNaver'
-
-import { useAuth } from '../../hooks/auth'
 
 import { Container, Title, ButtonAddNaver, TextButtonAddNaver, ContainerTitle } from './styles'
 
 export default function Home() {
   const navigation = useNavigation()
-  const [navers, setNavers] = useState([])
+  const isFocused = useIsFocused()
 
-  const { user } = useAuth()
+  const [navers, setNavers] = useState([])
 
   useEffect(() => {
     api.get('navers')
@@ -26,13 +24,14 @@ export default function Home() {
       .catch(error => {
         console.log('ERROR ', error)
       })
-  }, [])
+  }, [isFocused])
+
   return (
     <Container>
       <ContainerTitle>
         <Title>Navers</Title>
         <ButtonAddNaver
-          onPress={() => {}}
+          onPress={() => { navigation.navigate('Naver') }}
         >
           <TextButtonAddNaver>Adicionar naver</TextButtonAddNaver>
         </ButtonAddNaver>
