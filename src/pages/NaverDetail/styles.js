@@ -7,16 +7,19 @@ export const Container = styled.View`
 `;
 
 export const Name = styled.Text`
+  color: ${props => props.theme.secundary};
   font-size: 22px;
   font-family: 'Montserrat-SemiBold';
 `;
 
 export const Description = styled.Text`
+  color: ${props => props.theme.secundary};
   font-size: 16px;
   font-family: 'Montserrat-Regular';
 `;
 
 export const Label = styled.Text`
+  color: ${props => props.theme.secundary};
   font-size: 16px;
   font-family: 'Montserrat-SemiBold';
 `;

@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, View, Modal, Text } from 'r
 import InputComponent from '../../components/Input'
 import ButtonComponent from '../../components/Button'
 
-import { Container, Title } from './styles'
+import { Container, Content, Title } from './styles'
 import api from '../../services/api'
 import ModalComponent from '../../components/Modal';
 import { useNavigation } from '@react-navigation/native';
@@ -18,9 +18,19 @@ export default function Naver() {
   const [project, setProject] = useState('')
   const [url, setUrl] = useState('')
 
+  const [titleModal, setTitleModal] = useState('')
+  const [messageModal, setMessageModal] = useState('')
+
   // const [date, setDate] = useState(new Date())
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation()
+
+  function validateSubmit() {
+    if (name === '' || job_role === '' || project === '') {
+      return
+    }
+    handleSubmit()
+  }
 
   async function handleSubmit() {
     const submit = {
@@ -35,28 +45,35 @@ export default function Naver() {
     console.log(submit)
     try {
       const response = await api.post('/navers', submit)
-      console.log('RESPONSE ', response.data)
+
       if (response.status === 200) {
         setModalVisible(true)
+        setTitleModal("Naver adicionado")
+        setMessageModal("Naver adicionado com sucesso!")
+
+        navigation.goBack()
       }
     } catch (error) {
+      setModalVisible(true)
+      setTitleModal("Erro")
+      setMessageModal("Erro ao adicionar naver!")
       console.log('error submit ', error.response.data)
     }
   }
 
-  function onDismiss(){
+  function onDismiss() {
     setModalVisible(false)
-    navigation.goBack()
+
   }
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <Container>
+    <Container>
+      <Content>
         <ModalComponent
           modalVisible={modalVisible}
           onDismiss={onDismiss}
-          title="Naver adicionado"
-          message="Naver adicionado com sucesso!"
+          title={titleModal}
+          message={messageModal}
         />
         <Title>Adicionar naver</Title>
 
@@ -98,9 +115,9 @@ export default function Naver() {
           autoCapitalize="none"
           autoCorrect={false}
         />
-      </Container>
+      </Content>
 
-      <ButtonComponent text={"Salvar"} onPress={handleSubmit} />
-    </View>
+      <ButtonComponent text={"Salvar"} onPress={validateSubmit} />
+    </Container>
   );
 }

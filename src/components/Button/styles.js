@@ -4,7 +4,7 @@ export const Button = styled.TouchableOpacity`
   flex: 1;
   height: 40px;
   max-height: 40px;
-  background: #212121;
+  background: ${props => props.theme.secundary};
   margin: 5px;
 
   align-items: center;
@@ -13,5 +13,5 @@ export const Button = styled.TouchableOpacity`
 
 export const TextButton = styled.Text`
   font-family: 'Montserrat-SemiBold';
-  color: ${props => props.textColor ? props.textColor : '#FFFFFF'};
+  color: ${props => props.textColor ? props.textColor : props.theme.primary};
 `;

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image, Text } from 'react-native';
+import { Image, TouchableOpacity, useColorScheme } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -9,26 +10,31 @@ import NaverDetail from '../pages/NaverDetail';
 import Naver from '../pages/Naver';
 
 import logo from '../assets/logo.png'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import logoWhite from '../assets/logoWhite.png'
 
 const Drawer = createDrawerNavigator();
 const App = createStackNavigator();
 
 function Navers() {
+  const theme = useColorScheme();
   return (
     <App.Navigator
       screenOptions={{
-        headerTitle: () => <Image source={logo} />,
-        cardStyle: { backgroundColor: '#FFFFFF' },
+        headerTitle: () => <Image source={theme === "dark" ? logoWhite : logo} />,
+        cardStyle: { backgroundColor: theme === "dark" ? '#212121' : '#FFFFFF' },
         headerBackTitleVisible: false,
-        headerTintColor: '#212121',
+        headerTintColor: theme === "dark" ? '#FFFFFF' : '#212121',
+        headerStyle: {
+          backgroundColor: theme === "dark" ? '#212121' : '#FFFFFF',
+        }
+
       }}
     >
       <App.Screen
         options={({ navigation, route }) => ({
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-              <Text>menu</Text>
+            <TouchableOpacity onPress={() => navigation.toggleDrawer()} style={{ paddingLeft: 25 }}>
+              <Icon name="menu" size={24} color={theme === "dark" ? '#FFFFFF' : '#212121'} />
             </TouchableOpacity>
           ),
         })}

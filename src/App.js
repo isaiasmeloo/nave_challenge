@@ -1,21 +1,27 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
+import { StatusBar, useColorScheme } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { ThemeProvider } from 'styled-components';
 
 import 'react-native-gesture-handler';
 
 import Routes from './routes';
 import AppProvider from './hooks/index';
-import theme from './theme';
+import themes from './theme';
 
 const App = () => {
+  const deviceTheme = useColorScheme()
+
+  const theme = themes[deviceTheme] || theme.dark
+  console.log('THEME ', theme)
+
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <AppProvider>
           <NavigationContainer>
-            <Routes />
+            <Routes theme={theme} />
           </NavigationContainer>
         </AppProvider>
       </ThemeProvider>
