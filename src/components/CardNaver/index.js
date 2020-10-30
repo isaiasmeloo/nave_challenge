@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Container, NaverName, NaverJobRole, FooterButtons } from './styles';
 
 import noData from '../../assets/no_data.png';
+import noImage from '../../assets/no_image.png';
 
 import api from '../../services/api';
 import ModalComponent from '../Modal';
@@ -87,6 +88,7 @@ export default function CardNaver() {
           navigation.navigate('NaverDetail', { naverId: naver.id })
         }}>
           <Image
+            defaultSource={noImage}
             source={{ uri: naver?.url }}
             style={{ height: 156, width: 156 }}
           />

@@ -7,6 +7,8 @@ import api from '../../services/api';
 import ButtonComponent from '../../components/Button'
 import ModalComponent from '../../components/Modal';
 
+import noImage from '../../assets/no_image.png';
+
 import {
   Container,
   Name,
@@ -87,7 +89,7 @@ export default function NaverDetail({ route }) {
         onDelete={() => handleDelete(naver.id)}
         showOptions={modalConfirmation}
       />
-      <Image source={{ uri: naver?.url }} style={{ width: '100%', height: '40%' }} />
+      <Image defaultSource={noImage} source={{ uri: naver?.url }} style={{ width: '100%', height: '40%' }} />
       <Container>
         <View>
           <Name>{naver?.name}</Name>
