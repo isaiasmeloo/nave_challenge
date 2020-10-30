@@ -57,6 +57,11 @@ Para fazer a navegação entre rotas, utilize o [react-navigation](https://react
 
 Para fazer os alertas de sucesso/confirmação/erro, pode utilizar o componente de [modal do react native](https://reactnative.dev/docs/modal).
 
+## 🎨  Feature bônus
+```bash
+  Dark Mode 
+```
+
 ## 🛠 Como executar o projeto
 
 ```bash
