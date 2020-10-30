@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Button, TextButton } from './styles';
+import { Button, TextButton, Icon } from './styles';
 
-const ButtonComponent = ({ text, textColor, ...props }) => {
+const ButtonComponent = ({ text, textColor, icon, white, ...props }) => {
   return (
-    <Button {...props}>
-      <TextButton textColor={textColor}>{text}</TextButton>
+    <Button white={white} {...props}>
+      <Icon white={white} name={icon} size={18} />
+      <TextButton white={white} textColor={textColor}>{text}</TextButton>
     </Button>
   );
 }

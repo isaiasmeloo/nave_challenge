@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Modal, Text, TouchableOpacity } from 'react-native';
+import { View, Modal, TouchableOpacity, useColorScheme } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import ButtonComponent from '../Button'
-import { ModalContainer, ModalContent } from './styles';
 
-const ModalComponent = ({ modalVisible, title, message, onDismiss, onDelete, showOptions }) => {
+import { ModalContainer, ModalContent, ModalHeader, Title, Message } from './styles';
+
+const ModalComponent = ({ title, message, modalVisible, onDismiss, onDelete, showOptions }) => {
+  const theme = useColorScheme()
 
   return (
     <Modal
@@ -15,20 +17,20 @@ const ModalComponent = ({ modalVisible, title, message, onDismiss, onDelete, sho
     >
       <ModalContainer>
         <ModalContent>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={{ fontSize: 22, fontFamily: 'Montserrat-SemiBold' }}>{title}</Text>
+          <ModalHeader>
+            <Title>{title}</Title>
             <TouchableOpacity onPress={onDismiss}>
-              <Icon name="x" size={24} />
+              <Icon name="x" size={24} color={theme === "dark" ? "#FFFFFF" : "#212121"} />
             </TouchableOpacity>
-          </View>
-          <Text style={{ fontFamily: 'Montserrat-Regular', marginTop: 20 }}>{message}</Text>
+          </ModalHeader>
+          <Message>{message}</Message>
           {showOptions && (
             <View style={{ flexDirection: 'row', marginTop: 20 }}>
               <ButtonComponent
-                style={{ backgroundColor: 'transparent', borderWidth: 1 }}
+                style={{ marginRight: 6 }}
                 onPress={onDismiss}
                 text="Cancelar"
-                textColor="#212121"
+                white
               />
 
               <ButtonComponent

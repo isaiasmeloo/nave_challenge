@@ -2,12 +2,13 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  padding: 20px;
+  padding: 35px 20px;
   background: ${props => props.theme.primary};
 `;
 
-export const Content = styled.View`
+export const Content = styled.ScrollView`
   flex: 1;
+  padding: 0 0 30px 0;
   /* background: ${props => props.theme.primary}; */
   /* padding: 20px;  */
 `;

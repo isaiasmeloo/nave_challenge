@@ -47,9 +47,24 @@ function AuthProvider({ children }) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
         setUser({ email, id })
+        return true
       }
     } catch (error) {
-      console.log('error requiest ', error.response.data)
+      console.log(error.response.data)
+      return false
+    }
+  }, []);
+
+  const signOut = useCallback(async () => {
+    try {
+        await AsyncStorage.multiRemove([
+          '@Navers:user',
+          '@Navers:token',
+        ]);
+
+        setUser(null)
+    } catch (error) {
+      console.log(error)
     }
   }, []);
 
@@ -57,7 +72,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, signIn, loading }}
+      value={{ user, signIn, signOut, loading }}
     >
       {children}
     </AuthContext.Provider>

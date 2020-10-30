@@ -55,14 +55,14 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = navers/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* navers-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "navers-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* navers-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "navers-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DBAEEF8326A432CB97786AB /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		2DBAEEF8326A432CB97786AB /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		3499061117DEAA02FE7E26EE /* libPods-navers-naversTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-navers-naversTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4587D88F8D9DE600C792C8BE /* Pods-navers-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-navers-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-navers-tvOS/Pods-navers-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81696BD1AA91384CA74BDFC2 /* libPods-navers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-navers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = navers/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		997D84C53CE93CB6651A7493 /* Pods-navers-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-navers-tvOS.release.xcconfig"; path = "Target Support Files/Pods-navers-tvOS/Pods-navers-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		AD60A847A4EB982A33A5790D /* Pods-navers-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-navers-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-navers-tvOSTests/Pods-navers-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B2ED185CCA7C4D3CABE99CAE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		B2ED185CCA7C4D3CABE99CAE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		B66B3629B0417DFC18FE11D0 /* Pods-navers-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-navers-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-navers-tvOSTests/Pods-navers-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CAA2D509FFFDDF2405B06965 /* Pods-navers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-navers.debug.xcconfig"; path = "Target Support Files/Pods-navers/Pods-navers.debug.xcconfig"; sourceTree = "<group>"; };
 		D2B8F1A629B44C52177AEB9F /* libPods-navers-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-navers-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +160,6 @@
 				2DBAEEF8326A432CB97786AB /* Montserrat-SemiBold.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -209,7 +208,6 @@
 				AD60A847A4EB982A33A5790D /* Pods-navers-tvOSTests.debug.xcconfig */,
 				B66B3629B0417DFC18FE11D0 /* Pods-navers-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +307,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 83C322VYSW;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -737,6 +736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83C322VYSW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = navers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -745,7 +745,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.navers;
 				PRODUCT_NAME = navers;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -760,6 +760,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83C322VYSW;
 				INFOPLIST_FILE = navers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -767,7 +768,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.navers;
 				PRODUCT_NAME = navers;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

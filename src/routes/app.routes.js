@@ -4,13 +4,14 @@ import Icon from 'react-native-vector-icons/Feather'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import SignIn from '../pages/Auth/SignIn';
 import Home from '../pages/Home';
 import NaverDetail from '../pages/NaverDetail';
 import Naver from '../pages/Naver';
 
 import logo from '../assets/logo.png'
 import logoWhite from '../assets/logoWhite.png'
+
+import SignOut from '../pages/Auth/SignOut';
 
 const Drawer = createDrawerNavigator();
 const App = createStackNavigator();
@@ -79,7 +80,7 @@ export default function AppRoutes() {
       />
       <Drawer.Screen
         name="Sair"
-        component={SignIn}
+        component={SignOut}
       />
     </Drawer.Navigator>
   );

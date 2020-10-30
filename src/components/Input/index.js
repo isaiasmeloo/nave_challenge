@@ -3,7 +3,6 @@ import React from 'react';
 import { Container, Label, Input } from './styles';
 
 const InputComponent = ({ label, name, onChangeText, ...rest }) => {
-
   return (
     <Container>
       <Label>{label}</Label>

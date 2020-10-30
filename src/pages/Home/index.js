@@ -19,7 +19,9 @@ export default function Home() {
         </ButtonAddNaver>
       </ContainerTitle>
 
+
       <CardNaver />
+
     </Container>
   )
 }

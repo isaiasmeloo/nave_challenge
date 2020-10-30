@@ -13,7 +13,6 @@ const App = () => {
   const deviceTheme = useColorScheme()
 
   const theme = themes[deviceTheme] || theme.dark
-  console.log('THEME ', theme)
 
   return (
     <>

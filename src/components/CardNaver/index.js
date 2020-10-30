@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity, View, FlatList } from 'react-native';
+import { Image, TouchableOpacity, View, FlatList, Text, useColorScheme } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { Container, NaverName, NaverJobRole } from './styles';
+import { Container, NaverName, NaverJobRole, FooterButtons } from './styles';
+
+import noData from '../../assets/no_data.png';
 
 import api from '../../services/api';
 import ModalComponent from '../Modal';
 
-const CardNaver = () => {
+export default function CardNaver() {
   const navigation = useNavigation()
   const isFocused = useIsFocused()
+
+  const theme = useColorScheme()
 
   const [modalConfirmation, setModalConfirmation] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [navers, setNavers] = useState([])
+  const [isLoading, setIsLoading] = useState([])
 
   useEffect(() => {
     loadNavers()
@@ -22,29 +27,28 @@ const CardNaver = () => {
   }, [isFocused])
 
   function loadNavers() {
+    setIsLoading(true)
     api.get('navers')
       .then(response => {
-        console.log('RESPOSTA 27', response.data)
         if (response.status === 200) {
           setNavers(response.data)
         }
+        setIsLoading(false)
       })
       .catch(error => {
-        console.log('ERROR 34', error)
+        setIsLoading(false)
+        console.log(error)
       })
   }
 
   async function handleDelete(id) {
-    console.log('ID ', id)
     try {
       const response = await api.delete(`/navers/${id}`)
 
       if (response.status === 200) {
         setModalConfirmation(false)
         setModalVisible(true)
-        // loadNavers()
       } else {
-        console.log('erro 48')
         setModalConfirmation(false)
         setModalVisible(false)
       }
@@ -52,36 +56,32 @@ const CardNaver = () => {
     } catch (error) {
       setModalConfirmation(false)
       setModalVisible(false)
-      console.log('error delete ', error)
+      console.log(error)
     }
   }
 
   function onDismiss() {
-    console.log('ON DISMISS 61')
     loadNavers()
     setModalVisible(false)
     setModalConfirmation(false)
   }
 
-  function handleEdit() { }
+  function handleEdit(id) {
+    navigation.navigate('Naver', {
+      id
+    })
+  }
 
   function _renderItem(naver) {
-    console.log('NAVER 70 ', naver)
     return (
       <View>
         <ModalComponent
-          modalVisible={modalConfirmation}
-          title="Excluir naver"
-          message="Tem certeza que deseja excluir este naver?"
+          modalVisible={modalConfirmation || modalVisible}
+          title={modalConfirmation ? "Excluir naver" : "Naver excluído"}
+          message={modalConfirmation ? "Tem certeza que deseja excluir este naver?" : "Naver excluído com sucesso!"}
           onDismiss={onDismiss}
           onDelete={() => handleDelete(naver.id)}
-          showOptions
-        />
-        <ModalComponent
-          modalVisible={modalVisible}
-          title="Naver excluido"
-          message="Naver excluído com sucesso!"
-          onDismiss={onDismiss}
+          showOptions={modalConfirmation}
         />
         <Container key={naver.id} onPress={() => {
           navigation.navigate('NaverDetail', { naverId: naver.id })
@@ -94,30 +94,52 @@ const CardNaver = () => {
           <NaverName>{naver.name}</NaverName>
           <NaverJobRole>{naver.job_role}</NaverJobRole>
         </Container>
-        <View style={{ flexDirection: 'row', marginTop: 5 }}>
+
+        <FooterButtons>
           <TouchableOpacity onPress={() => setModalConfirmation(true)}>
-            <Icon name="trash" size={18} style={{ marginRight: 12 }} />
+            <Icon name="trash" size={18} color={theme === "dark" ? "#FFFFFF" : '#212121'} style={{ marginRight: 20 }} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleEdit}>
-            <Icon name="edit-2" size={18} />
+          <TouchableOpacity onPress={() => handleEdit(naver.id)}>
+            <Icon name="edit-2" size={18} color={theme === "dark" ? "#FFFFFF" : '#212121'} />
           </TouchableOpacity>
-        </View>
+        </FooterButtons>
       </View>
     )
   }
 
   return (
-    <FlatList
-      numColumns={2}
-      keyExtractor={item => item.id}
-      data={navers}
-      columnWrapperStyle={{
-        justifyContent: 'space-between'
-      }}
-      style={{ width: '100%' }}
-      renderItem={({ item }) => _renderItem(item)}
-    />
+    <>
+      {(navers && navers.length === 0) && !isLoading
+        ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{
+              fontSize: 18,
+              fontFamily: 'Montserrat-SemiBold',
+              marginBottom: 50
+            }}>Ainda não temos Navers cadastrados!</Text>
+            <Image
+              source={noData}
+              style={{
+                maxWidth: 293,
+                maxHeight: 306
+              }}
+            />
+          </View>
+        )
+        : (
+          <FlatList
+            numColumns={2}
+            keyExtractor={item => item.id}
+            data={navers}
+            columnWrapperStyle={{
+              justifyContent: 'space-between'
+            }}
+            style={{ width: '100%' }}
+            renderItem={({ item }) => _renderItem(item)}
+            showsVerticalScrollIndicator={false}
+          />
+        )
+      }
+    </>
   );
 }
-
-export default CardNaver;

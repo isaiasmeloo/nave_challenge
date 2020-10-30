@@ -13,7 +13,7 @@ export const Label = styled.Text`
   font-weight: 600;
   margin-top: 30px;
   line-height: 18px;
-  color: #212121;
+  color: ${props => props.theme.secundary};
 `;
 
 export const Input = styled.TextInput`
@@ -23,22 +23,7 @@ export const Input = styled.TextInput`
   border-color: #424242;
   font-size: 16px;
 
+  color: ${props => props.theme.secundary};
+
   padding: 8px;
-`;
-
-export const Button = styled.TouchableOpacity`
-  height: 40px;
-  width: 100%;
-  background: #212121;
-  margin-top: 40px;
-
-  align-items: center;
-  justify-content: center;
-`;
-
-export const TextButton = styled.Text`
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 18px;
-  color: #FFFFFF;
 `;

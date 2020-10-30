@@ -9,7 +9,13 @@ export const NaverName = styled.Text`
   font-family: 'Montserrat-SemiBold';
   margin: 5px 0;
 `;
+
 export const NaverJobRole = styled.Text`
   color: ${props => props.theme.secundary};
   font-family: 'Montserrat-Regular';
+`;
+
+export const FooterButtons = styled.View`
+  flex-direction: row;
+  margin-top: 5px;
 `;

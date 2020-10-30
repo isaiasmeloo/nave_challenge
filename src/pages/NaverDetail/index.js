@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Image, View, Alert } from 'react-native';
-import { differenceInYears, parseISO } from 'date-fns'
+import { Image, View } from 'react-native';
+import { differenceInMonths, differenceInYears, parseISO } from 'date-fns'
 import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import ButtonComponent from '../../components/Button'
+import ModalComponent from '../../components/Modal';
 
 import {
   Container,
@@ -14,10 +15,10 @@ import {
   ContainerButton,
 } from './styles';
 
-import image from '../../assets/IMG_9945.png';
-
 export default function NaverDetail({ route }) {
   const [naver, setNaver] = useState(null)
+  const [modalConfirmation, setModalConfirmation] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
   const navigation = useNavigation()
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function NaverDetail({ route }) {
         const response = await api.get(`/navers/${route.params.naverId}`)
 
         const age = differenceInYears(new Date(), parseISO(response.data.birthdate))
-        const company_time = differenceInYears(new Date(), parseISO(response.data.admission_date))
+        const company_time = differenceInMonths(new Date(), parseISO(response.data.admission_date))
 
         const mapped = {
           ...response.data,
@@ -45,20 +46,47 @@ export default function NaverDetail({ route }) {
     getNaver()
   }, [])
 
-  async function handleDeleteNaver() {
+  async function handleDelete() {
     try {
-      const response = await api.delete(`/navers/${route.params.naverId}`)
-      console.log(response.data)
-      Alert.alert('Sucesso!', 'Naver excluído.')
+      const response = await api.delete(`/navers/${route.params?.naverId}`)
 
-      navigation.goBack()
+      if (response.status === 200) {
+        setModalConfirmation(false)
+        setModalVisible(true)
+      } else {
+        setModalConfirmation(false)
+        setModalVisible(false)
+      }
+
     } catch (error) {
-      console.log('erro ao excluir ', error)
+      setModalConfirmation(false)
+      setModalVisible(false)
+      console.log('error delete ', error)
     }
+  }
+
+  function handleEdit(id) {
+    navigation.navigate('Naver', {
+      id
+    })
+  }
+
+  function onDismiss() {
+    setModalVisible(false)
+    setModalConfirmation(false)
+    navigation.goBack()
   }
 
   return (
     <View style={{ flex: 1 }}>
+      <ModalComponent
+        modalVisible={modalConfirmation || modalVisible}
+        title={modalConfirmation ? "Excluir naver" : "Naver excluído"}
+        message={modalConfirmation ? "Tem certeza que deseja excluir este naver?" : "Naver excluído com sucesso!"}
+        onDismiss={onDismiss}
+        onDelete={() => handleDelete(naver.id)}
+        showOptions={modalConfirmation}
+      />
       <Image source={{ uri: naver?.url }} style={{ width: '100%', height: '40%' }} />
       <Container>
         <View>
@@ -68,24 +96,30 @@ export default function NaverDetail({ route }) {
 
         <View>
           <Label>Idade</Label>
-          <Description> {naver?.age} </Description>
+          <Description>{naver?.age} anos</Description>
         </View>
         <View>
           <Label>Tempo de empresa</Label>
-          <Description> {naver?.company_time} </Description>
+          <Description>{naver?.company_time} meses</Description>
         </View>
         <View>
           <Label>Projetos que participou</Label>
-          <Description> {naver?.project} </Description>
+          <Description>{naver?.project}</Description>
         </View>
 
         <ContainerButton>
           <ButtonComponent
-            onPress={handleDeleteNaver}
-            style={{ backgroundColor: 'transparent', borderWidth: 1 }}
-            text="Excluir" textColor="#000000"
+            white
+            icon="trash"
+            onPress={() => setModalConfirmation(true)}
+            style={{ marginRight: 5 }}
+            text="Excluir"
           />
-          <ButtonComponent text="Editar" />
+          <ButtonComponent
+            icon="edit-2"
+            text="Editar"
+            onPress={() => handleEdit(naver.id)}
+          />
         </ContainerButton>
 
       </Container>
