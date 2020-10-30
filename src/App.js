@@ -16,7 +16,10 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
+      <StatusBar
+        barStyle={deviceTheme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={deviceTheme === "dark" ? "#212121" : "#FFFFFF"}
+      />
       <ThemeProvider theme={theme}>
         <AppProvider>
           <NavigationContainer>

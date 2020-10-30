@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import React from 'react';
-import { useColorScheme } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
 import { Label, DatePickerContainer, DatePickerValue } from './styles';
@@ -19,7 +19,6 @@ const DatePickerComponent = ({ title, date, showDatePicker, onPress, onDateChang
             date={date}
             mode="date"
             onDateChange={onDateChange}
-            locale="pt/BR"
             is24Hour={true}
             maximumDate={new Date()}
             textColor={theme === "dark" ? "#FFFFFF" : "#212121"}

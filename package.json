@@ -2,6 +2,11 @@
   "name": "navers",
   "version": "0.0.1",
   "private": true,
+  "author": {
+    "name" : "Isaias Melo",
+    "email" : "isaiassdm@hotmail.com",
+    "url" : "https://github.com/isaiasmeloo"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
