@@ -56,3 +56,27 @@ Para editar um `naver`, você deve usar a request de `navers/update` disponível
 Para fazer a navegação entre rotas, utilize o [react-navigation](https://reactnavigation.org/docs/getting-started). Ele também fornece um componente de [drawer](https://reactnavigation.org/docs/drawer-based-navigation), que faz parte do layout que está no figma.
 
 Para fazer os alertas de sucesso/confirmação/erro, pode utilizar o componente de [modal do react native](https://reactnative.dev/docs/modal).
+
+## 🎨  Feature bônus
+```bash
+  Dark Mode 
+```
+
+## 🛠 Como executar o projeto
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/isaiasmeloo/nave_challenge
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd nave_challenge
+
+# Instale as dependências
+$ npm install || yarn
+
+# Execute a aplicação
+$ yarn ios || yarn android
+
+* Requer XCode >= 11.6
+
+```
