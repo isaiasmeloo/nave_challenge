@@ -21,6 +21,7 @@ export default function CardNaver() {
   const [modalVisible, setModalVisible] = useState(false)
   const [navers, setNavers] = useState([])
   const [isLoading, setIsLoading] = useState([])
+  const [selectedId, setSelectedId] = useState(null)
 
   useEffect(() => {
     loadNavers()
@@ -42,17 +43,19 @@ export default function CardNaver() {
     }
   }
 
-  async function handleDelete(id) {
+  async function handleDelete() {
     try {
-      const response = await api.delete(`/navers/${id}`)
-
-      if (response.status === 200) {
-        setModalConfirmation(false)
-        setModalVisible(true)
-      } else {
-        setModalConfirmation(false)
-        setModalVisible(false)
+      if (selectedId) {
+        const response = await api.delete(`/navers/${selectedId}`)
+        console.log('RESPOSTA ', response)
+        if (response.status === 200) {
+          setNavers(navers.filter(naver => naver.id !== selectedId))
+          setModalConfirmation(false)
+          setModalVisible(true)
+        }
       }
+      setModalConfirmation(false)
+      setModalVisible(false)
 
     } catch (error) {
       setModalConfirmation(false)
@@ -81,7 +84,7 @@ export default function CardNaver() {
           title={modalConfirmation ? "Excluir naver" : "Naver excluído"}
           message={modalConfirmation ? "Tem certeza que deseja excluir este naver?" : "Naver excluído com sucesso!"}
           onDismiss={onDismiss}
-          onDelete={() => handleDelete(naver.id)}
+          onDelete={handleDelete}
           showOptions={modalConfirmation}
         />
         <Container key={naver.id} onPress={() => {
@@ -98,7 +101,10 @@ export default function CardNaver() {
         </Container>
 
         <FooterButtons>
-          <TouchableOpacity onPress={() => setModalConfirmation(true)}>
+          <TouchableOpacity onPress={() => {
+            setModalConfirmation(true)
+            setSelectedId(naver.id)
+          }}>
             <Icon name="trash" size={18} color={theme === "dark" ? "#FFFFFF" : '#212121'} style={{ marginRight: 20 }} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleEdit(naver.id)}>
