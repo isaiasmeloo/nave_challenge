@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Image, KeyboardAvoidingView, Platform, useColorScheme, View } from 'react-native';
+import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, useColorScheme, View } from 'react-native';
 
 import logo from '../../../assets/logo.png'
 import logoWhite from '../../../assets/logoWhite.png'
@@ -9,12 +9,13 @@ import ModalComponent from '../../../components/Modal';
 
 import { useAuth } from '../../../hooks/auth';
 
-import { Container, Input, Label } from './styles';
+import { Container, Input, Label, Loading } from './styles';
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const passwordRef = useRef(null)
 
@@ -23,13 +24,16 @@ export default function SignIn() {
   const theme = useColorScheme()
 
   async function handleSignIn() {
+    setIsLoading(true)
     try {
       const response = await signIn(email, password)
       if (!response) {
         setModalVisible(true)
       }
+      setIsLoading(false)
     } catch (error) {
       setModalVisible(true)
+      setIsLoading(false)
       console.log(error)
     }
   }
@@ -46,6 +50,11 @@ export default function SignIn() {
         message="Erro ao fazer login, verifique suas credenciais!"
         onDismiss={() => setModalVisible(false)}
       />
+      {isLoading && (
+        <Loading>
+          <ActivityIndicator color={theme === "dark" ? '#fff' : '#212121'} size="large" />
+        </Loading>
+      )}
       <Container>
         <Image source={theme === "dark" ? logoWhite : logo} />
 
