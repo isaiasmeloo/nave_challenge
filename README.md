@@ -74,6 +74,9 @@ $ cd nave_challenge
 # Instale as dependências
 $ npm install || yarn
 
+# Dependências nativas (iOS)
+$ cd ios/ && pod install && cd ..
+
 # Execute a aplicação
 $ yarn ios || yarn android
 
