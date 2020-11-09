@@ -27,19 +27,19 @@ export default function CardNaver() {
 
   }, [isFocused])
 
-  function loadNavers() {
+  async function loadNavers() {
     setIsLoading(true)
-    api.get('navers')
-      .then(response => {
-        if (response.status === 200) {
-          setNavers(response.data)
-        }
-        setIsLoading(false)
-      })
-      .catch(error => {
-        setIsLoading(false)
-        console.log(error)
-      })
+    try {
+      const response = await api.get('navers')
+
+      if (response.status === 200) {
+        setNavers(response.data)
+      }
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+      console.log(error)
+    }
   }
 
   async function handleDelete(id) {

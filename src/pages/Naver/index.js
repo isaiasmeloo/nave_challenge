@@ -38,23 +38,23 @@ export default function Naver({ route }) {
 
   }, [])
 
-  function getNaver(id) {
-    api.get(`navers/${id}`)
-      .then(response => {
-        if (response.status === 200) {
-          setName(response.data.name)
-          setJobRole(response.data.job_role)
-          setBirthdate(parseISO(response.data.birthdate))
-          setAdmissionDate(parseISO(response.data.admission_date))
-          setDate(parseISO(response.data.birthdate))
-          setDateCompany(parseISO(response.data.admission_date))
-          setProject(response.data.project)
-          setUrl(response.data.url)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  async function getNaver(id) {
+    try {
+      const response = await api.get(`navers/${id}`)
+
+      if (response.status === 200) {
+        setName(response.data.name)
+        setJobRole(response.data.job_role)
+        setBirthdate(parseISO(response.data.birthdate))
+        setAdmissionDate(parseISO(response.data.admission_date))
+        setDate(parseISO(response.data.birthdate))
+        setDateCompany(parseISO(response.data.admission_date))
+        setProject(response.data.project)
+        setUrl(response.data.url)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
