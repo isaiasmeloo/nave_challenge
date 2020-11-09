@@ -87,11 +87,14 @@ export default function Naver({ route }) {
         setModalVisible(true)
         setTitleModal(`Naver ${id ? 'editado' : 'adicionado'}`)
         setMessageModal(`Naver ${id ? 'editado' : 'adicionado'} com sucesso!`)
+        setTimeout(() => {
+          navigation.popToTop()
+        }, 3000);
       }
     } catch (error) {
       setModalVisible(true)
       setTitleModal("Erro")
-      setMessageModal("Erro ao adicionar naver!")
+      setMessageModal(`${id ? "Erro ao editar naver!" : "Erro ao adicionar naver!"}`)
       console.log('error submit ', error.response.data)
     }
   }
@@ -103,7 +106,6 @@ export default function Naver({ route }) {
 
   function onDismiss() {
     setModalVisible(false)
-    navigation.popToTop()
   }
 
   return (
